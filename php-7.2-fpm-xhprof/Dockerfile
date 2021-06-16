@@ -1,4 +1,5 @@
 FROM php:7.2-fpm
+ARG PHP_INI=/usr/local/etc/php/php.ini
 WORKDIR /tmp
 RUN docker-php-ext-install pdo pdo_mysql \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/Makefile.local > Makefile.local \
@@ -7,11 +8,11 @@ RUN docker-php-ext-install pdo pdo_mysql \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/trace.h > trace.h \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/config.w32 > config.w32 \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/xhprof.c > xhprof.c \
-    && curl https://raw.githubusercontent.com/belingud/develop_image/master/php-7.2-fpm-xhprof/php.ini > /usr/local/etc/php/php.ini \
+    && curl https://gitee.com/belingud/sources/raw/master/php.ini > ${PHP_INI} \
     && /usr/local/bin/phpize \
     && ./configure --with-php-config=$(which php-config) \
     && make && make install \
-    && echo '[xhprof]' >> /usr/local/etc/php.ini \
-    && echo 'extension = xhprof.so' >> /usr/local/etc/php.ini \
-    && echo 'xhprof.output_dir = /var/log/xhprof' >> /usr/local/etc/php.ini \
+    && echo '[xhprof]' >> ${PHP_INI} \
+    && echo 'extension = xhprof.so' >> ${PHP_INI} \
+    && echo 'xhprof.output_dir = /var/log/xhprof' >> ${PHP_INI} \
     && rm -rf * 
