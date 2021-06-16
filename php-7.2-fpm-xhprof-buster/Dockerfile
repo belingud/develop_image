@@ -7,7 +7,7 @@ RUN docker-php-ext-install pdo pdo_mysql \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/trace.h > trace.h \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/config.w32 > config.w32 \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/xhprof.c > xhprof.c \
-    && curl https://raw.githubusercontent.com/belingud/develop_image/master/php-7.2-fpm-xhprof/php.ini > /usr/local/etc/php/php.ini \
+    && curl https://gitee.com/belingud/sources/raw/master/php.ini > /usr/local/etc/php/php.ini \
     && /usr/local/bin/phpize \
     && ./configure --with-php-config=$(which php-config) \
     && make && make install \
