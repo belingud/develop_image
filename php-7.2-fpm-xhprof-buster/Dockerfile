@@ -1,7 +1,7 @@
 FROM php:7.2-fpm-buster
 ARG PHP_INI=/usr/local/etc/php/php.ini
 WORKDIR /tmp
-RUN docker-php-ext-install pdo pdo_mysql \
+RUN docker-php-ext-install pdo pdo_mysql gd \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/Makefile.local > Makefile.local \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/config.m4 > config.m4 \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/php_xhprof.h > php_xhprof.h \
