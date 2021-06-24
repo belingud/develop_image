@@ -1,7 +1,7 @@
 FROM php:7.2-fpm
 ARG PHP_INI=/usr/local/etc/php/php.ini
 WORKDIR /tmp
-RUN apt-get update && apt-get install libpng-dev \
+RUN apt-get update && apt-get -y --no-install-recommends install libpng-dev \
     && docker-php-ext-install pdo pdo_mysql gd \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/Makefile.local > Makefile.local \
     && curl https://gitee.com/belingud/xhprof/raw/master/extension/config.m4 > config.m4 \
